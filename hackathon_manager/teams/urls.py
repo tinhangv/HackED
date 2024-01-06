@@ -1,7 +1,13 @@
+from django.contrib.auth import views as auth_views
 from django.urls import path
 from . import views
+from .forms import LoginForm
+
+app_name = 'core'
+
 
 urlpatterns = [
-    path('create/', views.create_team, name='create_team'),
-    path('',views.index)
+    path('signup/', views.signup, name='signup'),
+    path('', views.index, name='index'),
+    path('login/', auth_views.LoginView.as_view(template_name="teams/login.html", authentication_form=LoginForm), name='login'),
 ]
