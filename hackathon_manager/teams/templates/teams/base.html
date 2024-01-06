@@ -5,8 +5,16 @@
 </head>
 <body>
     <div>
-        {% if user.is_authenticated %}
-            <a href="{% url 'logout' %}">Logout</a>
+
+        {% if request.user.is_authenticated %}
         {% else %}
-            <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'teams:signup' %}">Signup</a>
+        <a href="{% url 'teams:login' %}">Login</a>
         {% endif %}
+    </div>
+    <div>
+        {% block content %}{% endblock %}
+    </div>
+
+</body>
+</html>
