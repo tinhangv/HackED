@@ -1,0 +1,40 @@
+{% extends 'teams/base.html' %}
+
+{% block title %}Project Submission{% endblock %}
+
+{% block content %}
+<div>
+    <h1>Project Submission</h1>
+    <form method="post" action=".">
+        {% csrf_token %}
+
+        <div>
+            <label>Team Name</label><br>
+            {{ form.team_name }}
+        </div>
+        <div>
+            <label>Project Name</label><br>
+            {{ form.project_name }}
+        </div>
+        <div>
+            <label>Project Description</label><br>
+            {{ form.project_description }}
+        </div>
+        <div>
+            <label>Github Link</label><br>
+            {{ form.github_link }}
+        </div>
+
+        {% if form.errors or form.non_field_errors %}
+            <div>
+                {% for field in form %}
+                    {{ field.errors }}
+                {% endfor %}
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+
+        <button>Submit</button>
+    </form>
+</div>
+{% endblock %}
