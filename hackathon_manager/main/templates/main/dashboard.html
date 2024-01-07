@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HackHub</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #002b36; /* Dark background for dark mode */
+            color: white; /* White text color */
+        }
+        /* Additional custom styles */
+        /* Style for typing effect */
+        .typing-effect {
+            /* Customizations for HackHub title */
+            font-size: 3rem; /* Bigger font size */
+            font-family: 'YourFontName', sans-serif; /* Your desired font */
+            border-right: .15em solid white; /* Cursor-like right border */
+            white-space: nowrap; /* Keeps the content on a single line */
+            overflow: hidden; /* Hides anything that goes beyond the container */
+            animation: typing 3s steps(10, end), blink .75s step-end infinite;
+        }
+
+        /* Typing keyframe */
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        /* Blink keyframe */
+        @keyframes blink {
+            from, to { border-color: transparent }
+            50% { border-color: white; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'chatroom:channel_list' %}">Social</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'core:project' %}">Project Submission</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+
+    <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+        <div class="container" style="max-width: 800px;">
+            <h1 class="typing-effect text-center" id="typing-title"></h1>
+            <h5 class="text-center">SIMPLIFYING THE HACKATHON EXPERIENCE</h5>
+            <p class="lead text-center">Hey there, Hackathon heroes! We know the drill — chat on Discord, submit on DevPost, repeat. But what if we mashed them into one super platform? Imagine a place where you chat, plan, and submit without skipping a beat. Let's ditch the app-switching marathon and keep our eyes on the prize—innovation. Ready to make some hackathon magic? Join us and let’s make those ideas happen, all in one spot</p>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and its dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.9.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // JavaScript for dynamic typing
+        const title = "HackHub";
+        let i = 0;
+        const speed = 150; // Speed of typing in milliseconds
+        const typingTitle = document.getElementById("typing-title");
+
+        function typeWriter() {
+            if (i < title.length) {
+                typingTitle.innerHTML += title.charAt(i);
+                i++;
+                setTimeout(typeWriter, speed);
+            }
+        }
+
+        // Start typing effect once the page loads
+        window.onload = typeWriter;
+    </script>
+</body>
+</html>
