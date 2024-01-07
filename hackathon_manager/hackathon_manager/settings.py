@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'teams',
     'chatroom',
+    'main',
     'bootstrap5',
 ]
 
