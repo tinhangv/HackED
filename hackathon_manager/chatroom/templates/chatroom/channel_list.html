@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Channel List</title>
+</head>
+<body>
+    <h1>Channels</h1>
+    <ul>
+        {% if request.user.is_authenticated %}
+        {% for channel in channels %}
+            <li><a href="{% url 'chatroom:channel_message' channel.id %}">{{ channel.name }}</a></li>
+        {% empty %}
+            <li>No channels available.</li>
+        {% endfor %}
+        {% else %}
+        <a href="{% url 'teams:signup' %}">Signup</a>
+        <a href="{% url 'teams:login' %}">Login</a>
+        {% endif %}
+        
+    </ul>
+</body>
+</html>

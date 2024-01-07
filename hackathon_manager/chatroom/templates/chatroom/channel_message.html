@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Channel Details</title>
+</head>
+<body>
+    <h1>Messages in {{ name }}</h1>
+    <ul>
+        {% for message in messages %}
+            <li>{{ message.user.username }}: {{ message.content }} - <small>{{ message.timestamp }}</small></li>
+        {% empty %}
+            <li>No messages in this channel.</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Message Entry Form -->
+    <form action="{% url 'chatroom:channel_message' channel_id %}" method="post">
+        {% csrf_token %}
+        <textarea name="message_content" placeholder="Type your message here..."></textarea>
+        <button type="submit">Send</button>
+    </form>    
+</body>
+</html>
