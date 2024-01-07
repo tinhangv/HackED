@@ -3,16 +3,27 @@
 {% block title %}Sign Up{% endblock %}
 
 {% block content %}
-<div>
-    <h1>Log In</h1>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+    .login-container {
+        max-width: 400px;
+        margin: auto;
+        margin-top: 100px;
+    }
+</style>
+<div class="container login-container">
+    <h1 class="text-center mb-4">Log In</h1>
     <form method="post" action=".">
         {% csrf_token %}
 
-        <div>
+        <div class="form-group">
             <label>Username</label><br>
             {{ form.username }}
         </div>
-        <div>
+        <div class="form-group"> 
             <label>Password</label><br>
             {{ form.password }}
         </div>
@@ -26,7 +37,8 @@
             </div>
         {% endif %}
 
-        <button>Submit</button>
+        <button class="btn btn-primary btn-block">Submit</button>
     </form>
+    <p class="text-center mt-3">Don't have an account? <a href="{% url 'teams:signup' %}">Sign Up</a></p>
 </div>
 {% endblock %}
