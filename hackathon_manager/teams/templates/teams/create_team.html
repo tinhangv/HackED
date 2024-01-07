@@ -1,11 +1,38 @@
-{% extends 'teams/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Hackathon Team</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4">Hackathon Team Registration</h2>
+        <form action="{% url 'submit_team' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="teamName">Team Name</label>
+                <input type="text" class="form-control" id="teamName" name="team_name" required>
+            </div>
+            
+            <label>Team Members</label>
+            <div class="form-group">
+                <input type="text" class="form-control mb-2" name="team_member_1" placeholder="Team member 1 name" required>
+                <input type="text" class="form-control mb-2" name="team_member_2" placeholder="Team member 2 name" required>
+                <input type="text" class="form-control mb-2" name="team_member_3" placeholder="Team member 3 name">
+                <input type="text" class="form-control mb-2" name="team_member_4" placeholder="Team member 4 name">
+                <!-- Add more inputs as necessary -->
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Register Team</button>
+        </form>
+    </div>
 
-{% block content %}
-    <h2>Create a New Team</h2>
-    <form method="post">
-        {% csrf_token %}
-        <label for="team_name">Team Name:</label>
-        <input type="text" id="team_name" name="team_name" required>
-        <button type="submit">Create Team</button>
-    </form>
-{% endblock %}
+    <!-- Bootstrap JS and its dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.9.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

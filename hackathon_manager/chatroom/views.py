@@ -27,4 +27,8 @@ def channel_message(request, channel_id):
             new_message.save()
             return redirect('chatroom:channel_message', channel_id=channel_id)
 
-    return render(request, 'chatroom/channel_message.html', {'name': channel_name, 'messages': messages, 'channel_id': channel_id})
+    return render(request, 'chatroom/channel_message.html', {
+        'current_channel': channel,
+        'messages': messages,
+        'channels': Channel.objects.all(),  # Assuming you want to list all channels
+    })

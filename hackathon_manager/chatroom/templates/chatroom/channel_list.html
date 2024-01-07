@@ -2,21 +2,29 @@
 <html>
 <head>
     <title>Channel List</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>Channels</h1>
-    <ul>
-        {% if request.user.is_authenticated %}
-        {% for channel in channels %}
-            <li><a href="{% url 'chatroom:channel_message' channel.id %}">{{ channel.name }}</a></li>
-        {% empty %}
-            <li>No channels available.</li>
-        {% endfor %}
-        {% else %}
-        <a href="{% url 'teams:signup' %}">Signup</a>
-        <a href="{% url 'teams:login' %}">Login</a>
-        {% endif %}
-        
-    </ul>
+    <div class="container">
+        <h1 class="mt-4 mb-3">Channels</h1>
+        <div class="list-group">
+            {% if request.user.is_authenticated %}
+            {% for channel in channels %}
+                <a href="{% url 'chatroom:channel_message' channel.id %}" class="list-group-item list-group-item-action">{{ channel.name }}</a>
+            {% empty %}
+                <div class="list-group-item">No channels available.</div>
+            {% endfor %}
+            {% else %}
+            <a href="{% url 'teams:signup' %}" class="btn btn-primary">Signup</a>
+            <a href="{% url 'teams:login' %}" class="btn btn-secondary">Login</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Include Bootstrap JS and its dependencies -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

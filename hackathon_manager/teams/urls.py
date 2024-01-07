@@ -10,4 +10,5 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('', views.index, name='index'),
     path('login/', auth_views.LoginView.as_view(template_name="teams/login.html", authentication_form=LoginForm), name='login'),
+    path('teamRegister/', views.submit_team, name='submit_team'),
 ]

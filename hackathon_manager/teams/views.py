@@ -21,6 +21,22 @@ def signup(request):
         'form': form
     })
 
+def submit_team(request):
+    if request.method == 'POST':
+        team_name = request.POST.get('team_name')
+        team_members = [
+            request.POST.get('team_member_1'),
+            request.POST.get('team_member_2'),
+            request.POST.get('team_member_3'),
+            request.POST.get('team_member_4'),
+        ]
+        # Now you can process the form data, save it to the database, etc.
+        
+        # After processing, you might want to redirect to a new page
+        return redirect('submit_team')  # Replace 'success_page' with your actual success page URL name
+    
+    # If method is GET, just render the empty form
+    return render(request, 'teamRegister.html')
 
 '''
 @login_required
