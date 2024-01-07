@@ -1,8 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
-from .models import Team
-from .forms import SignupForm
+from .models import Team, ProjectDetails
+from .forms import SignupForm, ProjectDetailsForm
 
 # Create your views here.
 def index(request):
@@ -21,6 +21,62 @@ def signup(request):
         'form': form
     })
 
+def project_submission(request):
+    if request.method == 'POST':
+        form = ProjectDetailsForm(request.POST, request.FILES)
+        if form.is_valid():
+            team = form.cleaned_data['team_name']
+            user = request.user
+            if ProjectDetails.objects.filter(team_name=team).exists():
+                return render(request, 'error.html', {'error': 'Only one member from a team can submit the project details.'})
+            form.save()
+            return redirect('view_project')
+    else:
+        form = ProjectDetailsForm()
+    return render(request, 'teams/project_submission.html', {'form': form})
+
+
+def view_project(request, pk):
+    project = get_object_or_404(ProjectDetails, pk=pk)
+#    project = ProjectDetails.objects.get(id=3)
+    return render(request, 'view_project.html', {'project': project})
+
+#    user_team = request.user.members.team  # Assuming you have a user associated with a team
+#    projects = ProjectDetails.objects.filter(team=user_team)
+#    return render(request, 'teams/view_project.html', {'projects': projects})
+
+'''
+def project_submission(request):
+    if request.method == 'POST':
+        form = ProjectDetailsForm(request.POST, request.FILES)
+        if form.is_valid():
+            team = Team.objects.get(id=int(form.cleaned_data['team_name']))
+            user = request.user
+            if ProjectDetails.objects.filter(team=team).exists():
+                return render(request, 'error.html', {'error': 'Only one member from a team can submit the project details.'})
+            form.save()
+            return redirect('view_project')
+    else:
+        form = ProjectDetailsForm()
+    return render(request, 'teams/project_submission.html', {'form': form})
+'''
+'''
+def project_submission(request):
+#    team_queryset = Team.objects.all()
+    if request.method == 'POST':
+        form = ProjectDetailsForm(request.POST, request.FILES)
+        if form.is_valid():
+            team_name = form.cleaned_data['team_name']
+#            TeamIns = Team()
+#            team = get_object_or_404(Team, name=team_name)
+            if ProjectDetails.objects.filter(team_name=team_name).exists():
+                return render(request, 'error.html', {'error': 'Only one member from a team can submit the project details.'})
+            form.save()
+            return redirect('view_project')
+    else:
+        form = ProjectDetailsForm()
+    return render(request, 'teams/project_submission.html', {'form': form})
+'''
 
 '''
 @login_required
